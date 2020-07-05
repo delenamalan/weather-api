@@ -28,11 +28,6 @@ class MetaWeatherApiTest(TestCase):
         self.adapter = requests_mock.Adapter()
         self.session.mount("https://", self.adapter)
         self.adapter.register_uri("GET", "mock://test.com", json={"hello": "world"})
-        self.adapter.register_uri(
-            "GET",
-            "https://www.metaweather.com/api/location/44418/2013/04/27",
-            json=load_json_from_file("hourly_weather_for_day.json"),
-        )
         self.api = MetaWeatherApi(session=self.session)
 
     def test_no_woeid(self):
@@ -63,6 +58,12 @@ class MetaWeatherApiTest(TestCase):
         self.assertEqual(result, 44418)
 
     def test_get_weather_for_day(self):
+        self.adapter.register_uri(
+            "GET",
+            "https://www.metaweather.com/api/location/44418/2013/04/27",
+            json=load_json_from_file("hourly_weather_for_day.json"),
+        )
         result = self.api.get_weather_for_day(44418, date(2013, 4, 27))
-        self.assertEqual(result[0]["id"], 366945)
-        self.assertEqual(3, len(result))
+        self.assertEqual(result.min_temp, 3.07)
+        self.assertEqual(result.max_temp, 10.01)
+        self.assertEqual(result.humidity, 74)

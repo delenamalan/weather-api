@@ -11,7 +11,7 @@ LOCATION_SEARCH_URL = f"{BASE_URL}location/search/"
 LOCATION_URL = f"{BASE_URL}location/"
 
 
-class NoWeatherAvailableForDayException(Exception):
+class NoWeatherForDayFoundException(Exception):
     pass
 
 
@@ -21,6 +21,13 @@ class NoManyWoeidFound(Exception):
 
 class TooManyWoeidsFound(Exception):
     pass
+
+
+@dataclass
+class MetaWeatherForDayResult:
+    min_temp: float
+    max_temp: float
+    humidity: float
 
 
 @dataclass
@@ -77,7 +84,7 @@ class MetaWeatherApi:
         """
         pass
 
-    def get_weather_for_day(self, woeid: Woeid, day: date):
+    def get_weather_for_day(self, woeid: Woeid, day: date) -> MetaWeatherForDayResult:
         """
         Get the weather for a given day.
         """
@@ -86,4 +93,14 @@ class MetaWeatherApi:
         response = self.session.get(url)
         response.raise_for_status()
         data = response.json()
-        return data
+        if len(data) < 1:
+            raise NoWeatherForDayFoundException()
+
+        # Metaweather returns data from multiple sources for the same day so
+        # we have to select one of them
+        chosen_result = data[0]
+        return MetaWeatherForDayResult(
+            min_temp=chosen_result["min_temp"],
+            max_temp=chosen_result["max_temp"],
+            humidity=chosen_result["humidity"],
+        )
