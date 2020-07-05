@@ -1,0 +1,53 @@
+[
+  {
+    "id": 366945,
+    "weather_state_name": "Light Rain",
+    "weather_state_abbr": "lr",
+    "wind_direction_compass": "N",
+    "created": "2013-04-27T22:52:57.403100Z",
+    "applicable_date": "2013-04-27",
+    "min_temp": 3.07,
+    "max_temp": 10.01,
+    "the_temp": null,
+    "wind_speed": 9.85,
+    "wind_direction": 358,
+    "air_pressure": null,
+    "humidity": 74,
+    "visibility": 9.997862483098704,
+    "predictability": 75
+  },
+  {
+    "id": 373220,
+    "weather_state_name": "Light Rain",
+    "weather_state_abbr": "lr",
+    "wind_direction_compass": "N",
+    "created": "2013-04-27T20:52:55.929470Z",
+    "applicable_date": "2013-04-27",
+    "min_temp": 3.07,
+    "max_temp": 10.01,
+    "the_temp": null,
+    "wind_speed": 9.85,
+    "wind_direction": 358,
+    "air_pressure": null,
+    "humidity": 74,
+    "visibility": 9.997862483098704,
+    "predictability": 75
+  },
+  {
+    "id": 371006,
+    "weather_state_name": "Clear",
+    "weather_state_abbr": "c",
+    "wind_direction_compass": "NNE",
+    "created": "2013-04-27T18:52:50.537450Z",
+    "applicable_date": "2013-04-27",
+    "min_temp": 4,
+    "max_temp": null,
+    "the_temp": null,
+    "wind_speed": 5,
+    "wind_direction": 22.500000000000004,
+    "air_pressure": null,
+    "humidity": null,
+    "visibility": null,
+    "predictability": 68
+  }
+]

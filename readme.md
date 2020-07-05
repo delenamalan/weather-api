@@ -10,9 +10,9 @@ Dependencies:
 
 ```
 cd api
+touch db.sqlite3
 virtualenv -p /usr/bin/python3.6 venv && source venv/bin/activate
 pip install -r requirements.txt
-cd weathersite
 python manage.py migrate
 python manage.py createsuperuser
 python manage.py runserver
@@ -25,3 +25,12 @@ curl -H 'Accept: application/json; indent=4' -u <username>:<password> http://127
 
 
 ## Routes
+
+## Formatting files
+
+We use Black to format files:
+
+```
+source venv/bin/activate
+black */*.py
+```
