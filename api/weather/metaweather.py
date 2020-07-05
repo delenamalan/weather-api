@@ -1,9 +1,10 @@
-from .weather import WeatherABC, WeatherResult
-from requests import Session
-from urllib.parse import urljoin
-from datetime import date, timedelta
 from dataclasses import dataclass
+from datetime import date, timedelta
+from urllib.parse import urljoin
 
+from requests import Session
+
+from .weather import WeatherABC, WeatherResult
 
 BASE_URL = "https://www.metaweather.com/api/"
 LOCATION_SEARCH_PATH = "location/search/"

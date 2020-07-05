@@ -1,10 +1,12 @@
-from django.test import TestCase
-from unittest.mock import MagicMock
-from weather.metaweather import MetaWeatherApi
 import json
 import os
-from requests import Session
+from unittest.mock import MagicMock
+
 import requests_mock
+from django.test import TestCase
+from requests import Session
+
+from weather.metaweather import MetaWeatherApi
 
 CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
 

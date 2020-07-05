@@ -21,6 +21,12 @@ curl -H 'Accept: application/json; indent=4' -u <username>:<password> http://127
 
 ```
 
+#### Running tests
+
+```
+python manage.py test
+```
+
 ### Frontend
 
 
@@ -34,4 +40,10 @@ We use Black to format files:
 cd api
 source venv/bin/activate
 black --exclude ./venv/ ./
+```
+
+Isort:
+
+```
+isort -rc api weather weathersite
 ```
