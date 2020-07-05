@@ -1,10 +1,11 @@
 from dataclasses import dataclass
 from datetime import date, timedelta
 from urllib.parse import urljoin
+from statistics import mean, median
 
 from requests import Session
 
-from .weather import WeatherABC, WeatherResult
+from .weather import WeatherABC, WeatherResult, Period
 
 BASE_URL = "https://www.metaweather.com/api/"
 LOCATION_SEARCH_URL = f"{BASE_URL}location/search/"
@@ -30,22 +31,11 @@ class MetaWeatherForDayResult:
     humidity: float
 
 
-@dataclass
-class Period:
-    start_date: date
-    end_date: date
-
-    @property
-    def days(self):
-        days = []
-        current_date = self.start_date
-        while current_date <= self.end_date:
-            days.append(current_date)
-            current_date += timedelta(days=1)
-        return days
-
-
 class Woeid(int):
+    """
+    Class to represent a "Where On Earth ID."
+    """
+
     pass
 
 
@@ -80,9 +70,36 @@ class MetaWeatherApi:
 
     def get_weather_for_period(self, woeid: Woeid, period: Period) -> WeatherResult:
         """
-        Get weather for a period. Includes start and end date.
+        Get weather statistics for a period. Includes start and end date.
         """
-        pass
+        min_temps = []
+        max_temps = []
+        avg_temps = []
+        humidities = []
+        for day in period.days:
+            day_weather = self.get_weather_for_day(woeid, day)
+
+            # MetaWeather doesn't return an average temperature for a day or for any
+            # other range. It only returns a min and max temperature. So we calculate
+            # a "mean" below using the min and max temperature for a day which is
+            # obviously not correct, but the closest we can get with the given data.
+            avg_temp = mean((day_weather.min_temp, day_weather.max_temp))
+
+            min_temps.append(day_weather.min_temp)
+            max_temps.append(day_weather.max_temp)
+            avg_temps.append(avg_temp)
+            humidities.append(day_weather.humidity)
+
+        return WeatherResult(
+            min_temp=min(min_temps),
+            max_temp=max(max_temps),
+            avg_temp=mean(avg_temps),
+            med_temp=median(avg_temps),
+            min_humidity=min(humidities),
+            max_humidity=max(humidities),
+            avg_humidity=mean(humidities),
+            med_humidity=median(humidities),
+        )
 
     def get_weather_for_day(self, woeid: Woeid, day: date) -> MetaWeatherForDayResult:
         """

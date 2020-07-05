@@ -1,6 +1,6 @@
 import json
 import os
-from unittest.mock import MagicMock
+from unittest.mock import patch
 from datetime import date
 
 import requests_mock
@@ -12,6 +12,8 @@ from weather.metaweather import (
     Woeid,
     NoManyWoeidFound,
     TooManyWoeidsFound,
+    Period,
+    MetaWeatherForDayResult,
 )
 
 CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -67,3 +69,21 @@ class MetaWeatherApiTest(TestCase):
         self.assertEqual(result.min_temp, 3.07)
         self.assertEqual(result.max_temp, 10.01)
         self.assertEqual(result.humidity, 74)
+
+    def test_get_weather_for_period(self):
+        def mock_day_weathers(woeid, day):
+            return MetaWeatherForDayResult(min_temp=1, max_temp=10, humidity=10,)
+
+        period = Period(date(2013, 4, 27), date(2013, 4, 29))
+        with patch.object(
+            self.api, "get_weather_for_day", side_effect=mock_day_weathers
+        ):
+            result = self.api.get_weather_for_period(44418, period)
+            self.assertEqual(result.min_temp, 1)
+            self.assertEqual(result.max_temp, 10)
+            self.assertEqual(result.avg_temp, 5.5)
+            self.assertEqual(result.med_temp, 5.5)
+            self.assertEqual(result.min_humidity, 10)
+            self.assertEqual(result.max_humidity, 10)
+            self.assertEqual(result.avg_humidity, 10)
+            self.assertEqual(result.med_humidity, 10)
