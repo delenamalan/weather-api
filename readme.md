@@ -16,6 +16,9 @@ cd weathersite
 python manage.py migrate
 python manage.py createsuperuser
 python manage.py runserver
+
+curl -H 'Accept: application/json; indent=4' -u <username>:<password> http://127.0.0.1:8000/api/users/
+
 ```
 
 ### Frontend
