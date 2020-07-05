@@ -31,6 +31,7 @@ curl -H 'Accept: application/json; indent=4' -u <username>:<password> http://127
 We use Black to format files:
 
 ```
+cd api
 source venv/bin/activate
-black */*.py
+black --exclude ./venv/ ./
 ```
