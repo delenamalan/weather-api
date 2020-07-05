@@ -11,6 +11,18 @@ LOCATION_SEARCH_URL = f"{BASE_URL}location/search/"
 LOCATION_URL = f"{BASE_URL}location/"
 
 
+class NoWeatherAvailableForDayException(Exception):
+    pass
+
+
+class NoManyWoeidFound(Exception):
+    pass
+
+
+class TooManyWoeidsFound(Exception):
+    pass
+
+
 @dataclass
 class Period:
     start_date: date
@@ -53,13 +65,11 @@ class MetaWeatherApi:
         response.raise_for_status()
         data = response.json()
         if len(data) < 1:
-            # TODO: raise error
-            pass
+            raise NoManyWoeidFound()
         elif len(data) == 1:
             return data[0]["woeid"]
         else:
-            # TODO: raise error or return options
-            pass
+            raise TooManyWoeidsFound()
 
     def get_weather_for_period(self, woeid: Woeid, period: Period) -> WeatherResult:
         """

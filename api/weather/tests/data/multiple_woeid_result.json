@@ -1,0 +1,158 @@
+[
+  {
+    "title": "New York",
+    "location_type": "City",
+    "woeid": 2459115,
+    "latt_long": "40.71455,-74.007118"
+  },
+  {
+    "title": "Glasgow",
+    "location_type": "City",
+    "woeid": 21125,
+    "latt_long": "55.857800,-4.242510"
+  },
+  {
+    "title": "New Delhi",
+    "location_type": "City",
+    "woeid": 28743736,
+    "latt_long": "28.643999,77.091003"
+  },
+  {
+    "title": "Moscow",
+    "location_type": "City",
+    "woeid": 2122265,
+    "latt_long": "55.756950,37.614971"
+  },
+  {
+    "title": "Fort Worth",
+    "location_type": "City",
+    "woeid": 2406080,
+    "latt_long": "32.748631,-97.329247"
+  },
+  {
+    "title": "Washington DC",
+    "location_type": "City",
+    "woeid": 2514815,
+    "latt_long": "38.899101,-77.028999"
+  },
+  {
+    "title": "Milwaukee",
+    "location_type": "City",
+    "woeid": 2451822,
+    "latt_long": "43.041809,-87.906837"
+  },
+  {
+    "title": "Wakefield",
+    "location_type": "City",
+    "woeid": 38952,
+    "latt_long": "53.677631,-1.509510"
+  },
+  {
+    "title": "Wilmington",
+    "location_type": "City",
+    "woeid": 2521358,
+    "latt_long": "39.740231,-75.550842"
+  },
+  {
+    "title": "Warsaw",
+    "location_type": "City",
+    "woeid": 523920,
+    "latt_long": "52.235352,21.009390"
+  },
+  {
+    "title": "Wichita",
+    "location_type": "City",
+    "woeid": 2520077,
+    "latt_long": "37.686981,-97.335579"
+  },
+  {
+    "title": "New Orleans",
+    "location_type": "City",
+    "woeid": 2458833,
+    "latt_long": "29.953690,-90.077713"
+  },
+  {
+    "title": "Wuhan",
+    "location_type": "City",
+    "woeid": 2163866,
+    "latt_long": "30.572399,114.279121"
+  },
+  {
+    "title": "Mountain View",
+    "location_type": "City",
+    "woeid": 2455920,
+    "latt_long": "37.39999,-122.079552"
+  },
+  {
+    "title": "Kawasaki",
+    "location_type": "City",
+    "woeid": 1117502,
+    "latt_long": "35.556332,139.675201"
+  },
+  {
+    "title": "Ipswich",
+    "location_type": "City",
+    "woeid": 24522,
+    "latt_long": "52.054138,1.159280"
+  },
+  {
+    "title": "Norwich",
+    "location_type": "City",
+    "woeid": 30704,
+    "latt_long": "52.635349,1.280070"
+  },
+  {
+    "title": "Kirkwall",
+    "location_type": "City",
+    "woeid": 25462,
+    "latt_long": "58.981731,-2.96042"
+  },
+  {
+    "title": "Swansea",
+    "location_type": "City",
+    "woeid": 36758,
+    "latt_long": "51.623150,-3.940930"
+  },
+  {
+    "title": "Newcastle",
+    "location_type": "City",
+    "woeid": 30079,
+    "latt_long": "54.977940,-1.611620"
+  },
+  {
+    "title": "Swindon",
+    "location_type": "City",
+    "woeid": 36796,
+    "latt_long": "51.570969,-1.784020"
+  },
+  {
+    "title": "Newark",
+    "location_type": "City",
+    "woeid": 2459269,
+    "latt_long": "40.731972,-74.174179"
+  },
+  {
+    "title": "Wellington",
+    "location_type": "City",
+    "woeid": 2351310,
+    "latt_long": "-41.283779,174.787979"
+  },
+  {
+    "title": "Windhoek",
+    "location_type": "City",
+    "woeid": 1466719,
+    "latt_long": "-22.559561,17.08445"
+  },
+  {
+    "title": "Wolverhampton",
+    "location_type": "City",
+    "woeid": 40859,
+    "latt_long": "52.588638,-2.12168"
+  },
+  {
+    "title": "Cape Town",
+    "location_type": "City",
+    "woeid": 1591691,
+    "latt_long": "-33.919060,18.421961"
+  }
+]
