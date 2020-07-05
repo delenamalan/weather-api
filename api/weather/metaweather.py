@@ -7,8 +7,8 @@ from requests import Session
 from .weather import WeatherABC, WeatherResult
 
 BASE_URL = "https://www.metaweather.com/api/"
-LOCATION_SEARCH_PATH = "location/search/"
-LOCATION_PATH = "location/"
+LOCATION_SEARCH_URL = f"{BASE_URL}location/search/"
+LOCATION_URL = f"{BASE_URL}location/"
 
 
 @dataclass
@@ -49,8 +49,7 @@ class MetaWeatherApi:
 
     def get_woeid(self, city: str) -> Woeid:
         """ Get the Where on Earth identifier for a city"""
-        url = urljoin(BASE_URL, LOCATION_SEARCH_PATH)
-        response = self.session.get(url, params={"query": city})
+        response = self.session.get(LOCATION_SEARCH_URL, params={"query": city})
         response.raise_for_status()
         data = response.json()
         if len(data) < 1:
@@ -73,16 +72,8 @@ class MetaWeatherApi:
         Get the weather for a given day.
         """
         day_str = day.strftime("%Y/%m/%d")
-        url = urljoin(BASE_URL, f"{LOCATION_PATH}/{woeid}/{day_str}")
+        url = f"{LOCATION_URL}{woeid}/{day_str}"
         response = self.session.get(url)
         response.raise_for_status()
         data = response.json()
         return data
-        # if len(data) < 1:
-        #     # TODO: raise error
-        #     pass
-        # elif len(data) == 1:
-        #     return data[0]['woeid']
-        # else:
-        #     # TODO: raise error or return options
-        #     pass
