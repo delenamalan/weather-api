@@ -13,12 +13,3 @@ class WeatherView(FormView):
 
     def form_valid(self, form):
         return super().form_valid(form)
-
-
-class WeatherResultView(TemplateView):
-    template_name = "weather_result.html"
-
-    def get_context_data(self, **kwargs):
-        # Do an AJAX request
-        context = super().get_context_data(**kwargs)
-        return context
