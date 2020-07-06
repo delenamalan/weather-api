@@ -23,13 +23,13 @@ weather_instance = get_weather_instance_from_weather_settings(weather_import)
 
 
 def weather(request):
-    if request.method == 'GET':
+    if request.method == "GET":
         form = WeatherForm(request.GET)
         if not form.is_valid():
             return JsonResponse(form.errors.get_json_data(), status=400)
 
-        city = form.cleaned_data['city']
-        period_start, period_end = form.cleaned_data['period']
+        city = form.cleaned_data["city"]
+        period_start, period_end = form.cleaned_data["period"]
         result = weather_instance.query(city, period_start, period_end)
         return JsonResponse(result.to_dict())
     else:
