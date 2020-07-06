@@ -19,7 +19,6 @@ Files of note:
 System requirements:
 
 - Python 3.6
-- SQLite (or change the settings to use a different database)
 - Virtualenv
 - Pip
 
@@ -27,13 +26,12 @@ Installation:
 
 ```
 cd api
-touch db.sqlite3
 virtualenv -p /usr/bin/python3.6 venv && source venv/bin/activate
 pip install -r requirements.txt
-python manage.py migrate
-python manage.py createsuperuser
 python manage.py runserver
 ```
+
+Django might warn you to run migrations, but there's no need to set up a database or run migrations because we're not currently storing anything in a database.
 
 Fetching results:
 
