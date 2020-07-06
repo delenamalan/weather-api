@@ -10,7 +10,7 @@ class WeatherApiTest(TestCase):
     def test_get_weather(self):
         response = self.client.get(
             reverse("api.weather"),
-            {"city": "asdasdasdadsdadas", "period": "2020/01/02-2020/01/04"},
+            {"city": "test city", "period": "2020/01/02-2020/01/04"},
         )
         self.assertEqual(200, response.status_code)
         result = response.json()

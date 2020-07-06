@@ -40,7 +40,7 @@ class WeatherForm(forms.Form):
     city = forms.RegexField(
         r"^(\w|-| )+$",
         error_messages={
-            "invalid": "City may only contain alphabetical characters, spaces and hypens"
+            "invalid": "City may only contain alphabetical characters, spaces and hypens."
         },
         max_length=100,
     )

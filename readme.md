@@ -4,6 +4,9 @@ I used the [MetaWeather API](https://www.metaweather.com/api/) to fetch weather 
 
 Files of note:
  - [Class](./api/weather/metaweather.py) where weather data is fetched.
+ - [Tests](api/weather/tests/test_metaweather.py) for weather fetching code.
+ - [View class](api/api/views.py).
+ - [View test](api/api/tests/test_api.py).
 
 ## Setup instructions
 
