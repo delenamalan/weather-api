@@ -1,7 +1,8 @@
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponseNotFound, HttpResponseBadRequest
 from datetime import date
 from importlib import import_module
 from django.conf import settings
+from api.forms import WeatherForm
 
 
 def get_weather_instance_from_weather_settings(weather_import):
@@ -22,9 +23,14 @@ weather_instance = get_weather_instance_from_weather_settings(weather_import)
 
 
 def weather(request):
-    # TODO: validate query parameters
-    city = "Cape Town"
-    period_start = date(2020, 1, 1)
-    period_end = date(2020, 1, 1)
-    result = weather_instance.query(city, period_start, period_end)
-    return JsonResponse(result.to_dict())
+    if request.method == 'GET':
+        form = WeatherForm(request.GET)
+        if not form.is_valid():
+            return JsonResponse(form.errors.get_json_data(), status=400)
+
+        city = form.cleaned_data['city']
+        period_start, period_end = form.cleaned_data['period']
+        result = weather_instance.query(city, period_start, period_end)
+        return JsonResponse(result.to_dict())
+    else:
+        return HttpResponseNotFound()

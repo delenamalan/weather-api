@@ -2,6 +2,7 @@ from dataclasses import dataclass
 from datetime import date, timedelta
 from urllib.parse import urljoin
 from statistics import mean, median
+import logging
 
 from requests import Session
 
@@ -10,6 +11,8 @@ from weather.weather import WeatherABC, WeatherResult, Period
 BASE_URL = "https://www.metaweather.com/api/"
 LOCATION_SEARCH_URL = f"{BASE_URL}location/search/"
 LOCATION_URL = f"{BASE_URL}location/"
+
+logger = logging.getLogger(__name__)
 
 
 class NoWeatherForDayFoundException(Exception):
@@ -58,6 +61,7 @@ class MetaWeatherApi:
 
     def get_woeid(self, city: str) -> Woeid:
         """ Get the Where on Earth identifier for a city"""
+        logger.info(f"Getting woeid for '{city}'.")
         response = self.session.get(LOCATION_SEARCH_URL, params={"query": city})
         response.raise_for_status()
         data = response.json()
@@ -105,6 +109,7 @@ class MetaWeatherApi:
         """
         Get the weather for a given day.
         """
+        logger.info(f"Getting weather for {day} for woeid {woeid}.")
         day_str = day.strftime("%Y/%m/%d")
         url = f"{LOCATION_URL}{woeid}/{day_str}"
         response = self.session.get(url)
