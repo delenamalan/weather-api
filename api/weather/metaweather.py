@@ -5,7 +5,7 @@ from statistics import mean, median
 
 from requests import Session
 
-from .weather import WeatherABC, WeatherResult, Period
+from weather.weather import WeatherABC, WeatherResult, Period
 
 BASE_URL = "https://www.metaweather.com/api/"
 LOCATION_SEARCH_URL = f"{BASE_URL}location/search/"
@@ -43,7 +43,7 @@ class MetaWeather(WeatherABC):
     def __init__(self):
         self.api = MetaWeatherApi()
 
-    def query(self, city, period_start, period_end):
+    def query(self, city: str, period_start: date, period_end: date):
         woeid = self.api.get_woeid(city)
         period = Period(period_start, period_end)
         return self.api.get_weather_for_period(woeid, period)

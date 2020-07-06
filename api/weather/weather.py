@@ -14,6 +14,18 @@ class WeatherResult:
     avg_humidity: float
     med_humidity: float
 
+    def to_dict(self):
+        return {
+            "min_temp": self.min_temp,
+            "max_temp": self.max_temp,
+            "avg_temp": self.avg_temp,
+            "med_temp": self.med_temp,
+            "min_humidity": self.min_humidity,
+            "max_humidity": self.max_humidity,
+            "avg_humidity": self.avg_humidity,
+            "med_humidity": self.med_humidity,
+        }
+
 
 class WeatherABC(ABC):
     @abstractmethod
