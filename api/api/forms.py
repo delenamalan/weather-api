@@ -10,6 +10,7 @@ DATE_FORMAT = "%Y/%m/%d"
 class DatePeriodField(forms.CharField):
     default_error_messages = {
         "invalid": _("Must have the format: yyyy/mm/dd-yyyy/mm/dd."),
+        "invalid_period": _("Start date must be before end date."),
     }
 
     def clean(self, value):
@@ -26,6 +27,11 @@ class DatePeriodField(forms.CharField):
             end = datetime.strptime(match.group(2), DATE_FORMAT).date()
         except ValueError:
             raise ValidationError(self.error_messages["invalid"], code="invalid")
+
+        if start > end:
+            raise ValidationError(
+                self.error_messages["invalid_period"], code="invalid_period"
+            )
 
         return start, end
 

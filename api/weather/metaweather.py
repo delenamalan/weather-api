@@ -16,15 +16,23 @@ logger = logging.getLogger(__name__)
 
 
 class NoWeatherForDayFoundException(Exception):
-    pass
+    def __init__(self, msg="No weather found for day.", *args, **kwargs):
+        super().__init__(msg, *args, **kwargs)
 
 
 class NoManyWoeidFound(Exception):
-    pass
+    def __init__(self, msg="City not found.", *args, **kwargs):
+        super().__init__(msg, *args, **kwargs)
 
 
 class TooManyWoeidsFound(Exception):
-    pass
+    def __init__(
+        self,
+        msg="Too many cities match this query. Please try a more specific name.",
+        *args,
+        **kwargs,
+    ):
+        super().__init__(msg, *args, **kwargs)
 
 
 @dataclass

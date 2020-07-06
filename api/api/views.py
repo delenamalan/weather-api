@@ -3,6 +3,11 @@ from datetime import date
 from importlib import import_module
 from django.conf import settings
 from api.forms import WeatherForm
+from weather.metaweather import (
+    NoWeatherForDayFoundException,
+    NoManyWoeidFound,
+    TooManyWoeidsFound,
+)
 
 
 def get_weather_instance_from_weather_settings(weather_import):
@@ -30,7 +35,11 @@ def weather(request):
 
         city = form.cleaned_data["city"]
         period_start, period_end = form.cleaned_data["period"]
-        result = weather_instance.query(city, period_start, period_end)
+        try:
+            result = weather_instance.query(city, period_start, period_end)
+        except Exception as e:
+            return JsonResponse({"message": str(e)}, status=400)
+
         return JsonResponse(result.to_dict())
     else:
         return HttpResponseNotFound()
