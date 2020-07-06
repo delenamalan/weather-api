@@ -43,5 +43,9 @@ class WeatherForm(forms.Form):
             "invalid": "City may only contain alphabetical characters, spaces and hypens."
         },
         max_length=100,
+        initial="Cape Town",
     )
-    period = DatePeriodField()
+    period = DatePeriodField(
+        help_text="Date period in the form: yyyy/mm/dd-yyyy/mm/dd",
+        initial="2020/01/01-2020/01/03",
+    )

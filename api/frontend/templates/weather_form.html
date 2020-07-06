@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block js %}
+    {{ block.super }}
+    <script src="{% static 'js/weather.js' %}"></script>
+{% endblock %}
+
+{% block pagecontent %}
+
+<h1>Get weather statistics for a city during a given period</h1>
+
+<form method="post">{% csrf_token %}
+    {{ form.as_p }}
+    <input id="submit" type="submit" value="Get data">
+</form>
+
+<div id="results"></div>
+
+{% endblock %}

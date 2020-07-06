@@ -39,6 +39,10 @@ Fetching results:
 curl 'http://127.0.0.1:8000/api/weather?city=cape%20town&period=2020/07/01-2020/07/02'
 ```
 
+Viewing results in a browser:
+
+[http://127.0.0.1:8000/weather](http://127.0.0.1:8000/weather)
+
 Running the tests:
 
 ```
