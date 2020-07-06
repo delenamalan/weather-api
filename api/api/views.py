@@ -3,6 +3,7 @@ from datetime import date
 from importlib import import_module
 from django.conf import settings
 from api.forms import WeatherForm
+from django.views import View
 from weather.metaweather import (
     NoWeatherForDayFoundException,
     NoManyWoeidFound,
@@ -19,16 +20,19 @@ def get_weather_instance_from_weather_settings(weather_import):
     return weather_class()
 
 
-weather_import = (
-    settings.WEATHER_CLASS
-    if settings.WEATHER_CLASS
-    else "weather.metaweather.MetaWeather"
-)
-weather_instance = get_weather_instance_from_weather_settings(weather_import)
+class WeatherView(View):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        weather_import = (
+            settings.WEATHER_CLASS
+            if settings.WEATHER_CLASS
+            else "weather.metaweather.MetaWeather"
+        )
+        self.weather_instance = get_weather_instance_from_weather_settings(
+            weather_import
+        )
 
-
-def weather(request):
-    if request.method == "GET":
+    def get(self, request):
         form = WeatherForm(request.GET)
         if not form.is_valid():
             return JsonResponse(form.errors.get_json_data(), status=400)
@@ -36,10 +40,8 @@ def weather(request):
         city = form.cleaned_data["city"]
         period_start, period_end = form.cleaned_data["period"]
         try:
-            result = weather_instance.query(city, period_start, period_end)
+            result = self.weather_instance.query(city, period_start, period_end)
         except Exception as e:
             return JsonResponse({"message": str(e)}, status=400)
 
         return JsonResponse(result.to_dict())
-    else:
-        return HttpResponseNotFound()
