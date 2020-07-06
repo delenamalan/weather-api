@@ -2,11 +2,15 @@
 
 I used the [MetaWeather API](https://www.metaweather.com/api/) to fetch weather data. It can fetch historical weather data as well as up to a five day forecast.
 
+I created an abstract base class to fetch weather so that it can easily be replaced by a different provider or a mock. Replace the `WEATHER_CLASS` settings value with `"api.tests.mock_weather.MockWeather"` to use a mock weather class instead.
+
 Files of note:
- - [Class](./api/weather/metaweather.py) where weather data is fetched.
+ - [`weather` module](api/weather/weather.py) that contains the abstract base class, `Weather`, and other useful classes.
+ - [`metaweather` module](./api/weather/metaweather.py) that contains the MetaWeather specific code.
  - [Tests](api/weather/tests/test_metaweather.py) for weather fetching code.
  - [View class](api/api/views.py).
  - [View test](api/api/tests/test_api.py).
+ - [Forms tests](api/api/tests/test_forms.py).
 
 ## Setup instructions
 

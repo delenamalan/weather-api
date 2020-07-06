@@ -113,7 +113,11 @@ USE_TZ = True
 
 STATIC_URL = "/static/"
 
+# Swap out the weather class to be used to fetch data
 WEATHER_CLASS = "weather.metaweather.MetaWeather"
+
+# Mock weather class
+# WEATHER_CLASS = "api.tests.mock_weather.MockWeather"
 
 LOGGING = {
     "version": 1,
